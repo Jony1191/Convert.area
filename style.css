@@ -1,0 +1,153 @@
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6; /* Light background */
+    color: #333;
+}
+
+/* Converter Container Styling */
+.converter-container {
+    max-width: 950px; /* Slightly wider for modern feel */
+    margin: 40px auto; /* More margin top/bottom */
+    padding: 30px;
+    background-color: #ffffff; /* White background for the main box */
+    border-radius: 8px; /* Slightly rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px; /* Increased gap */
+}
+
+/* Clock Section Styling */
+.clock-section-wrapper {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px; /* More space below clock */
+    border-bottom: 1px solid #eee; /* Subtle separator */
+    padding-bottom: 15px;
+}
+
+.clock-title {
+    font-size: 22px; /* Larger title */
+    font-weight: bold;
+    color: #2c3e50; /* Darker title color */
+    margin-bottom: 8px;
+}
+
+.clock-display {
+    font-size: 2.8em; /* Even larger time font */
+    font-weight: bold;
+    color: #000000; /* Pure black for time */
+    letter-spacing: 1px; /* Slight letter spacing */
+}
+
+/* Flex Container for Input/Output */
+.converter-flex {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+
+/* Individual Converter Sections */
+.converter-section {
+    flex: 1;
+    min-width: 400px; /* Adjusted min-width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.converter-section label {
+    display: block;
+    margin-bottom: 18px; /* More space below label */
+    font-weight: bold;
+    color: #444;
+    font-size: 19px; /* Slightly larger label */
+}
+
+.converter-section textarea {
+    width: 100%;
+    height: 320px; /* Taller textareas */
+    padding: 18px;
+    border: 1px solid #ccc; /* Lighter border */
+    border-radius: 6px; /* Slightly rounded for inputs */
+    box-sizing: border-box;
+    font-family: 'Consolas', 'Courier New', monospace; /* Modern monospace font */
+    font-size: 17px;
+    resize: none;
+    background-color: #e0f7fa; /* Light cyan for input */
+    color: #333;
+    transition: border-color 0.3s ease; /* Smooth transition on focus */
+}
+
+.converter-section textarea:focus {
+    border-color: #007bff; /* Blue border on focus */
+    outline: none; /* Remove default outline */
+}
+
+.converter-result {
+    width: 100%;
+    height: 320px; /* Taller textareas */
+    padding: 18px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow-y: auto;
+    word-wrap: break-word;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 17px;
+    background-color: #f3e5f5; /* Light purple for output */
+    color: #333;
+}
+
+/* Action Buttons */
+.action-button {
+    background-color: #007bff; /* Blue button */
+    color: white; /* White text */
+    padding: 12px 25px; /* Larger padding */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded buttons */
+    cursor: pointer;
+    font-size: 17px;
+    margin-top: 25px; /* More margin top */
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+}
+
+.action-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 880px) { /* Adjusted breakpoint */
+    .converter-flex {
+        flex-direction: column;
+        gap: 25px;
+    }
+    .converter-section {
+        min-width: unset;
+        width: 90%; /* Occupy more width on smaller screens */
+    }
+    .converter-container {
+        margin: 20px 10px; /* Adjust side margin for small screens */
+        padding: 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    .clock-display {
+        font-size: 2.2em;
+    }
+    .converter-section textarea,
+    .converter-result {
+        height: 250px; /* Shorter textareas on very small screens */
+    }
+    .converter-section label {
+        font-size: 17px;
+    }
+}

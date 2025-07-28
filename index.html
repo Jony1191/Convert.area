@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আপনার ডেটা কনভার্টার টুল - দ্রুত এবং সহজ</title>
+    <meta name="description" content="দ্রুত এবং নির্ভুল ডেটা কনভার্টার টুল। একবারে একাধিক লাইন কনভার্ট করুন।">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="converter-container">
+        <div class="clock-section-wrapper">
+            <div class="clock-title">Current Time:</div>
+            <div class="clock-display" id="realTimeClock"></div>
+        </div>
+
+        <div class="converter-flex">
+            <div class="converter-section">
+                <label for="inputData">Enter your Data (One Item Per Line)</label>
+                <textarea id="inputData" placeholder="Enter items here, one per line..."></textarea>
+                <button class="action-button" onclick="alert('Donation button clicked! This can be linked to a donation page or script.')">Click add For Donation</button>
+            </div>
+
+            <div class="converter-section">
+                <label>Converted List:</label>
+                <div id="outputData" class="converter-result"></div>
+                <button class="action-button" onclick="copyToClipboard()">Copy To Clipboard</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
