@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আপনার ডেটা কনভার্টার টুল - দ্রুত এবং সহজ</title>
-    <meta name="description" content="দ্রুত এবং নির্ভুল ডেটা কনভার্টার টুল। একবারে একাধিক লাইন কনভার্ট করুন।">
+   <title>Text List Formatter & Converter | Easily Organize & Transform Data Lines</title>
+    <meta name="description" content="A free online tool to format text lists by adding custom prefixes, suffixes, suffixes, and delimiters. Convert lines to comma-separated, JSON, SQL, and more.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <p style="text-align: center; max-width: 800px; margin: 20px auto; font-size: 1.1em; line-height: 1.6;">Use this simple online tool to quickly transform your text lists. Add custom prefixes or suffixes to each line, and specify your desired delimiter (like comma, semicolon, or new line) to convert your data into a structured format for various uses.</p>
     <div class="converter-container">
         <div class="clock-section-wrapper">
             <div class="clock-title">Current Time:</div>
@@ -28,13 +29,13 @@
         </div>
         <div class="converter-flex">
             <div class="converter-section">
-                <label for="inputData">Enter your Data (One Item Per Line)</label>
+             <h2>Enter your Data (One Item Per Line)</h2>
                 <textarea id="inputData" placeholder="Enter items here, one per line..."></textarea>
                 <button class="action-button" id="donationButton">Click add For Donation</button>
             </div>
 
             <div class="converter-section">
-                <label>Converted List:</label>
+                <h2>Converted List:</h2>
                 <div id="outputData" class="converter-result"></div>
                 <button class="action-button" onclick="copyToClipboard()">Copy To Clipboard</button>
             </div>
