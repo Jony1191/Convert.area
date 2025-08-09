@@ -5,9 +5,125 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text List Formatter & Converter | Easily Organize & Transform Data Lines</title>
     <meta name="google-site-verification" content="-3WWim2Hw1FYzeOBP1m6KMFJg0YhhVsuZyktsJPgAPg" />
-    
     <meta name="description" content="A free online tool to format text lists by adding custom prefixes, suffixes, suffixes, and delimiters. Convert lines to comma-separated, JSON, SQL, and more.">
-    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Basic styling for the tool */
+        .converter-container {
+            font-family: Arial, sans-serif;
+            max-width: 900px; /* Increased max-width for better spacing */
+            margin: 20px auto;
+            padding: 20px;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column; /* Main container stacks clock and content vertically */
+            align-items: center; /* Centers the stacked items */
+            gap: 20px; /* Gap between clock section and converter sections */
+        }
+
+        /* Styling for the clock display section */
+        .clock-section-wrapper {
+            width: 100%; /* Take full width */
+            text-align: center; /* Center align clock and its title */
+            margin-bottom: 10px; /* Space below the clock section */
+        }
+
+        .clock-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px; /* Space below the clock title */
+        }
+
+        .clock-display {
+            font-size: 2.2em; /* Larger font size for time */
+            font-weight: bold;
+            color: #000; /* Black color for readability */
+            padding: 5px 0;
+            white-space: nowrap; /* Keep time components on one line */
+        }
+
+        .converter-flex {
+            display: flex;
+            gap: 30px; /* Gap between the two main sections */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            width: 100%; /* Occupy full width of its parent */
+            justify-content: center; /* Center align the flex items */
+        }
+
+        .converter-section {
+            flex: 1;
+            min-width: 380px; /* Minimum width for each section */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center align items within the section */
+        }
+
+        .converter-section h2 {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .converter-section textarea {
+            width: 100%;
+            height: 300px;
+            padding: 15px;
+            border: 2px solid black;
+            border-radius: 0;
+            box-sizing: border-box;
+            font-family: monospace;
+            font-size: 16px;
+            resize: none; /* Disable resizing for a fixed look */
+            background-color: #ffc0cb; /* Pink color for input */
+            color: #333;
+        }
+
+        .converter-result {
+            width: 100%;
+            height: 300px;
+            padding: 15px;
+            border: 2px solid black;
+            border-radius: 0;
+            overflow-y: auto;
+            word-wrap: break-word;
+            font-family: monospace;
+            font-size: 16px;
+            background-color: #b0e0e6; /* Light blue/lavender color for output */
+            color: #333;
+            user-select: all; /* Make the text selectable */
+        }
+
+        .action-button {
+            background-color: transparent;
+            color: black;
+            padding: 10px 20px;
+            border: 2px solid black;
+            border-radius: 0;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .action-button:hover {
+            background-color: #eee;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 800px) {
+            .converter-flex {
+                flex-direction: column; /* Stack input/output vertically on smaller screens */
+                gap: 20px; /* Adjust gap for stacked items */
+            }
+            .converter-section {
+                min-width: unset; /* Remove min-width restriction on small screens */
+                width: 95%; /* Occupy more width on smaller screens */
+            }
+        }
+    </style>
 </head>
 <body>
     
@@ -44,14 +160,83 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
-
     <script>
+        const inputData = document.getElementById('inputData');
+        const outputData = document.getElementById('outputData');
+        const realTimeClock = document.getElementById('realTimeClock');
+
+        const delimiter = ',';
+        const itemPrefix = '';
+        const itemSuffix = '';
+        const resultPrefix = '';
+        const resultSuffix = '';
+
+        function convertData() {
+            const lines = inputData.value.split('\n').map(line => line.trim()).filter(line => line !== '');
+            const processedLines = lines.map(line => itemPrefix + line + itemSuffix);
+            const result = resultPrefix + processedLines.join(delimiter) + resultSuffix;
+            outputData.textContent = result;
+            
+            // Automatically select the converted text
+            const range = document.createRange();
+            range.selectNodeContents(outputData);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+
+            // Automatically copy the selected text to the clipboard
+            if (result) {
+                navigator.clipboard.writeText(result)
+                    .then(() => {
+                        console.log('Text copied to clipboard!');
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy: ', err);
+                        // alert('Failed to copy text. Please copy it manually.');
+                    });
+            }
+        }
+
+        function copyToClipboard() {
+            const textToCopy = outputData.textContent;
+            if (textToCopy) {
+                navigator.clipboard.writeText(textToCopy)
+                    .then(() => {
+                        console.log('Text copied to clipboard!');
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy: ', err);
+                        alert('Failed to copy text. Please copy it manually.');
+                    });
+            } else {
+                alert('Nothing to copy!');
+            }
+        }
+
+        // Function to update the clock
+        function updateClock() {
+            const now = new Date();
+            const options = {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true // AM/PM format
+            };
+            realTimeClock.textContent = now.toLocaleTimeString('en-US', options);
+        }
+
+        inputData.addEventListener('input', convertData);
+        convertData(); // Initial conversion
+
+        // Update the clock immediately and then every second
+        updateClock();
+        setInterval(updateClock, 1000);
+        
         document.getElementById('donationButton').onclick = function() {
             window.open('https://www.profitableratecpm.com/sxdkcs7e?key=c842c83a08c265995ef09ee1ddea9574', '_blank');
         };
     </script>
-
+    
     <p style="text-align: center; max-width: 800px; margin: 20px auto; font-size: 1.1em; line-height: 1.6;">Use this simple online tool to quickly transform your text lists. Add custom prefixes or suffixes to each line, and specify your desired delimiter (like comma, semicolon, or new line) to convert your data into a structured format for various uses.</p>
 </body>
 </html>
